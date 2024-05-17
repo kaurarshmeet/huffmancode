@@ -72,20 +72,6 @@ public class CompressFile {
          */
         String[] charKey = hf.getCode(hf.root); // calls assignCode
 
-        /* NOTE: Delete when done. */
-        System.out.printf("%-15s%-15s%-15s%-15s\n", "ASCII Code", "Character", "Frequency", "Encoding");
-        for (int i = 0; i < frequencies.length; i++) {
-            if (frequencies[i] != 0) {
-                if (i == 10) { // ASCII for 10 is new line
-                    System.out.printf("%-15d%-15s%-15d%-15s\n", i, "New Line", frequencies[i], charKey[i]);
-                } else if (i == 13) { // ASCII for 13 is Carriage Return (Ignore when decompressing)
-                    System.out.printf("%-15d%-15s%-15d%-15s\n", i, "CR", frequencies[i], charKey[i]);
-                } else {
-                    System.out.printf("%-15d%-15s%-15d%-15s\n", i, (char) i + "", frequencies[i], charKey[i]);
-                }
-            }
-        }
-
         /* Author: Vincent
         writeMessage() takes the array of codes for each character and the input message
         returns the encoded method that we want to put into the output file. */
@@ -103,6 +89,9 @@ public class CompressFile {
         oos.writeObject(hf);
         bos.writeInt(outputMessage.length());
         bos.writeBits(outputMessage);
+        
+        System.out.println("Message outputted successfully."); 
+        
         oos.flush();
         bos.flush();
         oos.close();

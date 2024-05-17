@@ -62,7 +62,7 @@ public class DecompressFile {
             System.out.println("Decoded message written to " + decompressedFile);
 
 
-            System.out.println("Decoded message from file is = ")
+            System.out.println("Decoded message from file is = ");
             System.out.println(decodeBinaryString(message,hf));
 
         } catch (FileNotFoundException e) {
