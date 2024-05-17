@@ -50,6 +50,7 @@ public class DecompressFile {
             System.out.println("Message length: " + messageLength);
 
             String message = bis.readBits(messageLength);
+
             String decodedMessage = decodeBinaryString(message, hf);
 
             // Write the decoded message to the decompressed file
@@ -59,6 +60,10 @@ public class DecompressFile {
                 System.err.println("Error writing to decompressed file: " + e.getMessage());
             }
             System.out.println("Decoded message written to " + decompressedFile);
+
+
+            System.out.println("Decoded message from file is = ")
+            System.out.println(decodeBinaryString(message,hf));
 
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage());
