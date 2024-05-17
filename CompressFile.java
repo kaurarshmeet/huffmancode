@@ -23,7 +23,6 @@ public class CompressFile {
             File outputFile = new File(args[1]);
 
             try {
-                System.out.println("Compressing file.");
                 compressFile(inputFile, outputFile);
             }
             catch (Exception e) {
@@ -158,7 +157,6 @@ public class CompressFile {
                 frequencies[index]++; // count the character in text
             }
         }
-        System.out.println("exiting");
         return frequencies;
     }
 

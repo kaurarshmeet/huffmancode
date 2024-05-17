@@ -16,6 +16,8 @@ public class DecompressFile {
      * The main method where the execution of the program begins. It processes input arguments and handles file operations for decompression.
      *
      * @param args command line arguments, expecting two: the path to the compressed file and the path for the decompressed output file.
+     * @author Stephen
+     * @author Wilson
      */
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -44,10 +46,8 @@ public class DecompressFile {
              ObjectInputStream ois = new ObjectInputStream(bis)) {
 
             HuffmanTree hf = (HuffmanTree) ois.readObject();
-            System.out.println("Huffman Tree read successfully.");
 
             int messageLength = bis.readInt();
-            System.out.println("Message length: " + messageLength);
 
             String message = bis.readBits(messageLength);
 
@@ -60,10 +60,6 @@ public class DecompressFile {
                 System.err.println("Error writing to decompressed file: " + e.getMessage());
             }
             System.out.println("Decoded message written to " + decompressedFile);
-
-
-            System.out.println("Decoded message from file is = ");
-            System.out.println(decodeBinaryString(message,hf));
 
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage());
@@ -81,6 +77,7 @@ public class DecompressFile {
      * @param binaryString the string of binary data to decode.
      * @param huffmanTree the Huffman tree used for decoding.
      * @return the decoded string.
+     * @author Wilson
      */
     public static String decodeBinaryString(String binaryString, HuffmanTree huffmanTree) {
         StringBuilder decodedString = new StringBuilder();
@@ -103,6 +100,8 @@ public class DecompressFile {
 /**
  * A BitInputStream reads bits from a file. It extends FileInputStream to
  * provide methods for reading individual bits and other bit-level operations.
+ * @author Wilson
+ * @author Stephen
  */
 class BitInputStream extends FileInputStream {
     private int currentByte; // the byte we're reading in

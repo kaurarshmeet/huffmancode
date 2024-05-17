@@ -4,3 +4,4 @@ Try to compress this file,
 And then decompress it too.
 
 Newline.
+
