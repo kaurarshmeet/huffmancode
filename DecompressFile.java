@@ -1,5 +1,15 @@
 import java.io.*;
 
+/**
+ * Module 15, Programming Project:
+ * <br> 1. This class decompresses a file that was compressed using Huffman coding.
+ * <br> 2. Taking a compressed file as input, then reconstructs the Huffman Tree from the file,
+ * as it reads the encoded message, decodes it using the Huffman Tree, and writes the decoded 
+ * message to a specified output file.
+ * @author Shuyu Cai
+ * @author Wilson Chung
+ */
+
 public class DecompressFile {
     public static void main(String[] args) {
         if (args.length != 2) {
