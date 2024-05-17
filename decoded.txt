@@ -1,6 +1,0 @@
-Roses are red,
-Violets are blue,
-Try to compress this file,
-And then decompress it too.
-
-Newline.
