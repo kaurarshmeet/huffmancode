@@ -72,16 +72,32 @@ public class DecompressFile {
     }
 }
 
+/**
+ * A BitInputStream reads bits from a file. It extends FileInputStream to
+ * provide methods for reading individual bits and other bit-level operations.
+ */
 class BitInputStream extends FileInputStream {
     private int currentByte; // the byte we're reading in
     private int numBits; // the number of bits that have been read in
 
+    /**
+     * Constructs a BitInputStream that reads from the specified file.
+     *
+     * @param file the file to read from
+     * @throws FileNotFoundException if the file does not exist
+     */
     public BitInputStream(File file) throws FileNotFoundException {
         super(file);
         currentByte = 0;
         numBits = 0;
     }
 
+    /**
+     * Reads the next bit from the input stream.
+     *
+     * @return the next bit (0 or 1), or -1 if the end of the file is reached
+     * @throws IOException if an I/O error occurs
+     */
     public int readBit() throws IOException {
         if (numBits == 0) { // no bits have been read yet
             // read one byte from FileInputStream
@@ -98,6 +114,13 @@ class BitInputStream extends FileInputStream {
         return bit;
     }
 
+    /**
+     * Reads the specified number of bits from the input stream.
+     *
+     * @param quantity the number of bits to read
+     * @return a string representing the bits read
+     * @throws IOException if an I/O error occurs
+     */
     public String readBits(int quantity) throws IOException {
         StringBuilder bitString = new StringBuilder();
         for (int i = 0; i < quantity; i++) {
@@ -108,6 +131,12 @@ class BitInputStream extends FileInputStream {
         return bitString.toString();
     }
 
+    /**
+     * Reads the next four bytes from the input stream and returns them as an integer.
+     *
+     * @return the next four bytes as an integer
+     * @throws IOException if an I/O error occurs or if the end of the file is reached
+     */
     public int readInt() throws IOException {
         int intValue = 0;
         for (int i = 0; i < 4; i++) {
@@ -118,10 +147,21 @@ class BitInputStream extends FileInputStream {
         return intValue;
     }
 
+    /**
+     * Reads the next byte from the input stream.
+     *
+     * @return the next byte as an integer
+     * @throws IOException if an I/O error occurs
+     */
     public int readByte() throws IOException {
         return Integer.parseInt(readBits(8), 2);
     }
 
+    /**
+     * Closes this input stream and releases any system resources associated with the stream.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public void close() throws IOException {
         super.close();
