@@ -10,10 +10,23 @@ public class DecompressFile {
         String compressedFile = args[0];
         String decompressedFile = args[1];
 
-        File f = new File(compressedFile);
+        File compressed = new File(compressedFile);
+        File decompressed = new File(decompressedFile);
 
-        try(BitInputStream bis = new BitInputStream(f);
-            ObjectInputStream ois = new ObjectInputStream(bis)) {
+        // Create the decompressed file if it doesn't exist
+        if (!decompressed.exists()) {
+            try {
+                decompressed.createNewFile();
+                System.out.println("Created new file: " + decompressedFile);
+            } catch (IOException e) {
+                System.err.println("Error creating new file: " + e.getMessage());
+                return;
+            }
+        }
+
+        try (BitInputStream bis = new BitInputStream(compressed);
+             ObjectInputStream ois = new ObjectInputStream(bis)) {
+
             HuffmanTree hf = (HuffmanTree) ois.readObject();
             System.out.println("Huffman Tree read successfully.");
 
@@ -21,7 +34,16 @@ public class DecompressFile {
             System.out.println("Message length: " + messageLength);
 
             String message = bis.readBits(messageLength);
-            System.out.println("Decoded message from file is = "+decodeBinaryString(message,hf));
+            String decodedMessage = decodeBinaryString(message, hf);
+
+            // Write the decoded message to the decompressed file
+            try (FileWriter writer = new FileWriter(decompressed)) {
+                writer.write(decodedMessage);
+            } catch (IOException e) {
+                System.err.println("Error writing to decompressed file: " + e.getMessage());
+            }
+            System.out.println("Decoded message written to " + decompressedFile);
+
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage());
         } catch (IOException e) {
