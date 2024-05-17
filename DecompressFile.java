@@ -11,6 +11,12 @@ import java.io.*;
  */
 
 public class DecompressFile {
+
+    /**
+     * The main method where the execution of the program begins. It processes input arguments and handles file operations for decompression.
+     *
+     * @param args command line arguments, expecting two: the path to the compressed file and the path for the decompressed output file.
+     */
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("Usage: java DecompressFile <compressed file> <decompressed file>");
@@ -64,6 +70,13 @@ public class DecompressFile {
         }
     }
 
+    /**
+     * Decodes a binary string using a given Huffman tree to reconstruct the original message.
+     *
+     * @param binaryString the string of binary data to decode.
+     * @param huffmanTree the Huffman tree used for decoding.
+     * @return the decoded string.
+     */
     public static String decodeBinaryString(String binaryString, HuffmanTree huffmanTree) {
         StringBuilder decodedString = new StringBuilder();
         HuffmanTree.HuffmanNode currentNode = huffmanTree.root;
